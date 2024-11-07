@@ -1,8 +1,8 @@
 
 + seed leagues 
-// seed teams
-// seed fixtures
-// seed stats for fixtures
++ seed teams
+// seed fixtures ?
+// seed stats for fixtures ?
 
 gole - 1,2 polowa, calosc
 pierwszy gol?

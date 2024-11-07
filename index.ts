@@ -15,5 +15,5 @@ app.get('/', (req: Request, res: Response) => {
 app.listen(port, async () => {
     // createLeagues();
 
-    createTeams();
+    // createTeams();
 });
