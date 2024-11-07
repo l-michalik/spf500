@@ -1,10 +1,10 @@
+import { CLeaguesInterface } from "./types";
 import { createOptions } from "./utils";
 import dbConnect from "./lib/dbConnect"
+import { CLeagues } from "./constants";
+import { League } from "./models";
 import { exit } from "process";
 import axios from "axios";
-import { CLeagues } from "./constants";
-import { CLeaguesInterface } from "./types";
-import { League } from "./models/League";
 
 export const createLeagues = async () => {
     const docs: any[] = [];

@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import { createLeagues } from './src/createLeagues';
+import { createTeams } from './createTeams';
 
 const app = express();
 
@@ -12,5 +13,7 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.listen(port, async () => {
-    createLeagues();
+    // createLeagues();
+
+    createTeams();
 });
