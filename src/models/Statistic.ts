@@ -27,89 +27,89 @@ const statisticSchema: Schema = new mongoose.Schema<IStats>({
     },
     shotsOnGoal: {
       type: Number,
-      required: true,
+      required: false,
     },
     shotsOffGoal: {
       type: Number,
-      required: true,
+      required: false,
     },
     totalShots: {
       type: Number,
-      required: true,
+      required: false,
     },
     fouls: {
       type: Number,
-      required: true,
+      required: false,
     },
     corners: {
       type: Number,
-      required: true,
+      required: false,
     },
     offsides: {
       type: Number,
-      required: true,
+      required: false,
     },
     yellowCards: {
       type: Number,
-      required: true,
+      required: false,
     },
     redCards: {
       type: Number,
-      required: true,
+      required: false,
     },
     halftimeGoals: {
       type: Number,
-      required: true,
+      required: false,
     },
     fulltimeGoals: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
   away: {
     fixtureId: {
       type: Number,
-      required: true,
+      required: false,
     },
     shotsOnGoal: {
       type: Number,
-      required: true,
+      required: false,
     },
     shotsOffGoal: {
       type: Number,
-      required: true,
+      required: false,
     },
     totalShots: {
       type: Number,
-      required: true,
+      required: false,
     },
     fouls: {
       type: Number,
-      required: true,
+      required: false,
     },
     corners: {
       type: Number,
-      required: true,
+      required: false,
     },
     offsides: {
       type: Number,
-      required: true,
+      required: false,
     },
     yellowCards: {
       type: Number,
-      required: true,
+      required: false,
     },
     redCards: {
       type: Number,
-      required: true,
+      required: false,
     },
     halftimeGoals: {
       type: Number,
-      required: true,
+      required: false,
     },
     fulltimeGoals: {
       type: Number,
-      required: true,
+      required: false,
     },
   },
 })

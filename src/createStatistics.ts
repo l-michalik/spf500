@@ -11,12 +11,14 @@ export const createStatistics = async () => {
         await dbConnect();
 
         const fixtures = await Fixture
-            .find({ statistic: null, timestamp: { $lt: Date.now() / 1000 } }).select("id teams")
+            .find({ statistic: null, timestamp: { $lt: Date.now() / 1000 - 60 * 60 * 24 } }).select("id teams")
             .populate(["teams.home", "teams.away"])
-            .limit(5);
+            .limit(20);
+
+        console.log(`Found ${fixtures.length} fixtures.`);
 
         fixtures.map(async (fixture) => {
-            const options = createOptions({
+            const options = createOptions({ 
                 path: "fixtures/statistics",
                 params: {
                     fixture: `${fixture.id}`,
@@ -31,6 +33,18 @@ export const createStatistics = async () => {
 
             const homeTeamId = teams.home.id;
             const awayTeamId = teams.away.id;
+
+            if(data.length === 0){
+                console.log(`No statistics found for fixture ${fixture.id}.`);
+                counter++;
+
+                if (counter === fixtures.length) {
+                    console.log("All statistics created successfully.");
+                    exit(0);
+                }
+
+                return;
+            }
 
             const homeTeamStats = data.find((x: any) => x.team.id === homeTeamId).statistics;
             const awayTeamStats = data.find((x: any) => x.team.id === awayTeamId).statistics;
@@ -61,7 +75,7 @@ export const createStatistics = async () => {
                     corners: homeTeamStats.find((x: any) => x.type === "Corner Kicks").value,
                     offsides: homeTeamStats.find((x: any) => x.type === "Offsides").value,
                     yellowCards: homeTeamStats.find((x: any) => x.type === "Yellow Cards").value,
-                    redCards: homeTeamStats.find((x: any) => x.type === "Red Cards").value || 0,
+                    redCards: homeTeamStats.find((x: any) => x.type === "Red Cards").value,
                     halftimeGoals: homeHalftimeGoals,
                     fulltimeGoals: homeFulltimeGoals,
                 },
@@ -74,7 +88,7 @@ export const createStatistics = async () => {
                     corners: awayTeamStats.find((x: any) => x.type === "Corner Kicks").value,
                     offsides: awayTeamStats.find((x: any) => x.type === "Offsides").value,
                     yellowCards: awayTeamStats.find((x: any) => x.type === "Yellow Cards").value,
-                    redCards: awayTeamStats.find((x: any) => x.type === "Red Cards").value || 0,
+                    redCards: awayTeamStats.find((x: any) => x.type === "Red Cards").value,
                     halftimeGoals: awayHalftimeGoals,
                     fulltimeGoals: awayFulltimeGoals,
                 },
