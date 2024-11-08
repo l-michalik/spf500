@@ -1,9 +1,9 @@
 import { exit } from "process";
-import dbConnect from "./src/lib/dbConnect";
-import { League } from "./src/models";
-import { CLeagues } from "./src/constants";
-import { createOptions, insertOrUpdateTeams } from "./src/utils";
-import { IleagueIds } from "./src/types";
+import dbConnect from "./lib/dbConnect";
+import { League } from "./models";
+import { CLeagues } from "./constants";
+import { createOptions, insertOrUpdateTeams } from "./utils";
+import { IleagueIds } from "./types";
 import axios from "axios";
 
 export const createTeams = async () => {
@@ -29,8 +29,6 @@ export const createTeams = async () => {
                 params: { season: `2024`, league: league.id },
                 path: "teams",
             });
-
-            await dbConnect();
 
             const response = await axios.request(options);
 
