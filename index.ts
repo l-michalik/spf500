@@ -1,4 +1,4 @@
-import { create_updateFixtures } from './src/create_updateFixtures';
+import { createOrUpdateFixtures } from './src/createOrUpdateFixtures';
 import express, { Request, Response } from 'express';
 import { createLeagues } from './src/createLeagues';
 import { createTeams } from './src/createTeams';
@@ -18,5 +18,5 @@ app.listen(port, async () => {
 
     // createTeams();
 
-    create_updateFixtures();
+    // createOrUpdateFixtures();
 });

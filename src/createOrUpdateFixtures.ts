@@ -6,7 +6,7 @@ import { IleagueIds } from "./types";
 import { createOptions } from "./utils";
 import axios from "axios";
 
-export const create_updateFixtures = async () => {
+export const createOrUpdateFixtures = async () => {
     const leaguesIds: any[] = [];
     let counter = 0;
 
@@ -45,14 +45,6 @@ export const create_updateFixtures = async () => {
                         Team.findOne({ id: teams.away.id }).select("_id")
                     ]);
 
-                    let _Statistic = null;
-
-                    if (new Date().getTime() / 1000 > fixture.timestamp) {
-                        
-                    } else {
-
-                    }
-
                     return {
                         id: fixture.id,
                         timestamp: fixture.timestamp,
@@ -61,7 +53,7 @@ export const create_updateFixtures = async () => {
                             home: _Home,
                             away: _Away
                         },
-                        statistic: _Statistic
+                        statistic: null
                     };
                 })
             );
