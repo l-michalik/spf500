@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-export interface IStats {
+interface IStatistic {
   fixtureId: number;
   shotsOnGoal: number;
   shotsOffGoal: number;
@@ -10,75 +10,106 @@ export interface IStats {
   offsides: number;
   yellowCards: number;
   redCards: number;
-  goals: {
-    halftime: {
-      home: number;
-      away: number;
-    },
-    fulltime: {
-      home: number;
-      away: number;
-    },
-  }
+  halftimeGoals: number;
+  fulltimeGoals: number;
+}
+
+export interface IStats {
+  home: IStatistic;
+  away: IStatistic;
 }
 
 const statisticSchema: Schema = new mongoose.Schema<IStats>({
-  fixtureId: {
-    type: Number,
-    required: true,
-  },
-  shotsOnGoal: {
-    type: Number,
-    required: true,
-  },
-  shotsOffGoal: {
-    type: Number,
-    required: true,
-  },
-  totalShots: {
-    type: Number,
-    required: true,
-  },
-  fouls: {
-    type: Number,
-    required: true,
-  },
-  corners: {
-    type: Number,
-    required: true,
-  },
-  offsides: {
-    type: Number,
-    required: true,
-  },
-  yellowCards: {
-    type: Number,
-    required: true,
-  },
-  redCards: {
-    type: Number,
-    required: true,
-  },
-  goals: {
-    halftime: {
-      home: {
-        type: Number,
-        required: true,
-      },
-      away: {
-        type: Number,
-        required: true,
-      },
+  home: {
+    fixtureId: {
+      type: Number,
+      required: true,
     },
-    fulltime: {
-      home: {
-        type: Number,
-        required: true,
-      },
-      away: {
-        type: Number,
-        required: true,
-      },
+    shotsOnGoal: {
+      type: Number,
+      required: true,
+    },
+    shotsOffGoal: {
+      type: Number,
+      required: true,
+    },
+    totalShots: {
+      type: Number,
+      required: true,
+    },
+    fouls: {
+      type: Number,
+      required: true,
+    },
+    corners: {
+      type: Number,
+      required: true,
+    },
+    offsides: {
+      type: Number,
+      required: true,
+    },
+    yellowCards: {
+      type: Number,
+      required: true,
+    },
+    redCards: {
+      type: Number,
+      required: true,
+    },
+    halftimeGoals: {
+      type: Number,
+      required: true,
+    },
+    fulltimeGoals: {
+      type: Number,
+      required: true,
+    },
+  },
+  away: {
+    fixtureId: {
+      type: Number,
+      required: true,
+    },
+    shotsOnGoal: {
+      type: Number,
+      required: true,
+    },
+    shotsOffGoal: {
+      type: Number,
+      required: true,
+    },
+    totalShots: {
+      type: Number,
+      required: true,
+    },
+    fouls: {
+      type: Number,
+      required: true,
+    },
+    corners: {
+      type: Number,
+      required: true,
+    },
+    offsides: {
+      type: Number,
+      required: true,
+    },
+    yellowCards: {
+      type: Number,
+      required: true,
+    },
+    redCards: {
+      type: Number,
+      required: true,
+    },
+    halftimeGoals: {
+      type: Number,
+      required: true,
+    },
+    fulltimeGoals: {
+      type: Number,
+      required: true,
     },
   },
 })

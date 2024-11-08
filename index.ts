@@ -2,6 +2,7 @@ import { createOrUpdateFixtures } from './src/createOrUpdateFixtures';
 import express, { Request, Response } from 'express';
 import { createLeagues } from './src/createLeagues';
 import { createTeams } from './src/createTeams';
+import { createStatistics } from './src/createStatistics';
 
 const app = express();
 
@@ -19,4 +20,6 @@ app.listen(port, async () => {
     // createTeams();
 
     // createOrUpdateFixtures();
+
+    createStatistics();
 });
