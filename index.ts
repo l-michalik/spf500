@@ -4,7 +4,7 @@ import { createLeagues } from './src/createLeagues';
 import { createTeams } from './src/createTeams';
 import { createStatistics } from './src/createStatistics';
 import cors from 'cors'; // Import cors
-import { League } from './src/models';
+import { Fixture, League } from './src/models';
 import dbConnect from './src/lib/dbConnect';
 
 const app = express();
@@ -17,12 +17,15 @@ app.use(cors({
     methods: ['GET', 'POST', 'OPTIONS'],
 }));
 
-app.get('/', async (req: Request, res: Response) => {
+app.get('/getFixtures', async (req: Request, res: Response) => {
     await dbConnect();
     
-    const leagues = await League.find({});
-    
-    res.send(leagues);
+    const fixtures = await Fixture
+        .find({ timestamp: { $gt: Date.now() } })
+        .sort({ timestamp: 1 })
+        .populate(["teams.home", "teams.away"])
+
+    res.send(fixtures);
 });
 
 app.listen(port, async () => {

@@ -39,21 +39,22 @@ export const createOrUpdateFixtures = async () => {
                     const fixture = doc.fixture;
                     const teams = doc.teams;
 
-                    const [_League, _Home, _Away] = await Promise.all([
+                    const [_League, _Home, _Away, _Statistic] = await Promise.all([
                         League.findOne({ id: league.id }).select("_id"),
                         Team.findOne({ id: teams.home.id }).select("_id"),
-                        Team.findOne({ id: teams.away.id }).select("_id")
+                        Team.findOne({ id: teams.away.id }).select("_id"),
+                        Statistic.findOne({ "home.fixtureId": fixture.id }).select("_id"),
                     ]);
 
                     return {
                         id: fixture.id,
-                        timestamp: fixture.timestamp,
+                        timestamp: new Date(fixture.date).getTime(),
                         league: _League,
                         teams: {
                             home: _Home,
                             away: _Away
                         },
-                        statistic: null
+                        statistic: _Statistic
                     };
                 })
             );

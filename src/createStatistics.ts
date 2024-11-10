@@ -13,7 +13,7 @@ export const createStatistics = async () => {
         const fixtures = await Fixture
             .find({ statistic: null, timestamp: { $lt: Date.now() / 1000 - 60 * 60 * 24 } }).select("id teams")
             .populate(["teams.home", "teams.away"])
-            .limit(20);
+            .limit(10);
 
         console.log(`Found ${fixtures.length} fixtures.`);
 
