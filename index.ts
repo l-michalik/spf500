@@ -4,7 +4,7 @@ import { createLeagues } from './src/createLeagues';
 import { createTeams } from './src/createTeams';
 import { createStatistics } from './src/createStatistics';
 import cors from 'cors'; // Import cors
-import { Fixture, League } from './src/models';
+import { Fixture, League, Team } from './src/models';
 import dbConnect from './src/lib/dbConnect';
 
 const app = express();
@@ -19,13 +19,49 @@ app.use(cors({
 
 app.get('/getFixtures', async (req: Request, res: Response) => {
     await dbConnect();
-    
+
     const fixtures = await Fixture
         .find({ timestamp: { $gt: Date.now() } })
         .sort({ timestamp: 1 })
         .populate(["teams.home", "teams.away"])
+        .limit(100)
 
     res.send(fixtures);
+});
+
+app.get('/getFixture/:leagueId', async (req: Request, res: Response) => {
+    await dbConnect();
+
+    const fixture = await Fixture
+        .find({ id: req.params.leagueId, timestamp: { $gt: Date.now() } })
+        .sort({ timestamp: 1 })
+        .populate(["teams.home", "teams.away"]);
+
+    res.send(fixture);
+});
+
+app.get('/getFixtureStats/:fixtureId/:teamId', async (req: Request, res: Response) => {
+    await dbConnect();
+
+    const teamId = Number(req.params.teamId);
+
+    const team = await Team.findOne({ id: teamId });
+
+    const teamFixtures = await Fixture
+        .find({
+            statistic: { $ne: null },
+            $or: [
+                { "teams.home": team },
+                { "teams.away": team }
+            ]
+        })
+        .populate(["teams.home", "teams.away", "statistic"])
+        .sort({ timestamp: -1 })
+        .limit(5);
+
+    res.send({
+        team: teamFixtures,
+    });
 });
 
 app.listen(port, async () => {

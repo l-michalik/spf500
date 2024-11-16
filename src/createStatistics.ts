@@ -11,8 +11,9 @@ export const createStatistics = async () => {
         await dbConnect();
 
         const fixtures = await Fixture
-            .find({ statistic: null, timestamp: { $lt: Date.now() / 1000 - 60 * 60 * 24 } }).select("id teams")
+            .find({ statistic: null, timestamp: { $lt: Date.now() } }).select("id teams")
             .populate(["teams.home", "teams.away"])
+            .sort({ timestamp: 1 })
             .limit(10);
 
         console.log(`Found ${fixtures.length} fixtures.`);
