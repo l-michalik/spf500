@@ -13,7 +13,7 @@ const port: number = 4000;
 require("dotenv").config();
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'https://spfront500.vercel.app/'],
     methods: ['GET', 'POST', 'OPTIONS'],
 }));
 
