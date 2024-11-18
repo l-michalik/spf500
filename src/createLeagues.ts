@@ -34,7 +34,14 @@ export const createLeagues = async () => {
     try {
         await dbConnect();
 
-        await League.insertMany(docs);
+        for (const doc of docs) {
+            const existingLeague = await League.findOne({ id: doc.id });
+
+            if (!existingLeague) {
+            await League.create(doc);
+            }
+        }
+
     } catch (error) {
         console.log(error);
         exit(1);

@@ -1,6 +1,4 @@
+# ANALYSIS
+Analiza zdarzenia polega, no przenalizowaniu prawdopodibieństwa zdarzenia, na podstawie oceny częstotliwości, kursy dotarczangeo od bukmachera oraz przeczytaniu artykułu na temat tego zdarzenia
 
-+ seed leagues 
-+ seed teams
-+ seed fixtures
-// add stats handler
-// add front app with stats
+# sprawdzic: parzyste - nieparzyste

@@ -21,7 +21,7 @@ app.get('/getFixtures', async (req: Request, res: Response) => {
     await dbConnect();
 
     const fixtures = await Fixture
-        .find({ timestamp: { $gt: Date.now() } })
+        .find({ timestamp: { $gt: Date.now() - (2 * 60 * 60 * 1000) } })
         .sort({ timestamp: 1 })
         .populate(["teams.home", "teams.away"])
         .limit(100)
