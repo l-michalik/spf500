@@ -29,12 +29,10 @@ app.get('/getFixtures', async (req: Request, res: Response) => {
     res.send(fixtures);
 });
 
-app.get('/getFixture/:leagueId', async (req: Request, res: Response) => {
+app.get('/getFixture/:fixtureId', async (req: Request, res: Response) => {
     await dbConnect();
 
-    const fixture = await Fixture
-        .find({ id: req.params.leagueId, timestamp: { $gt: Date.now() } })
-        .sort({ timestamp: 1 })
+    const fixture = await Fixture.findOne({ id: req.params.fixtureId })
         .populate(["teams.home", "teams.away"]);
 
     res.send(fixture);
