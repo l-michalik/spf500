@@ -13,9 +13,10 @@ export const createStatistics = async () => {
         const fixtures = await Fixture
             .find({ statistic: null, timestamp: { $lt: Date.now() - (24 * 60 * 60 * 1000) } }).select("id teams")
             .populate(["teams.home", "teams.away"])
-            .sort({ timestamp: 1 })
+            .sort({ timestamp: -1 })
 
         console.log(`Found ${fixtures.length} fixtures.`);
+        
 
         for (let i = 0; i < fixtures.length; i += 10) {
             setTimeout(async () => {
