@@ -13,7 +13,7 @@ export const createTeams = async () => {
     try {
         await dbConnect();
 
-        const leagues = await League.find({ id: { $in: CLeagues.map((x) => x.Id) } }).select("id");
+        const leagues = await League.find({ id: { $in: CLeagues.map((x) => x.Id) } }).select(["id", "newestSeason"]);
 
         leaguesIds.push(...leagues);
     } catch (error) {
@@ -26,7 +26,7 @@ export const createTeams = async () => {
 
         try {
             const options = createOptions({
-                params: { season: `2024`, league: league.id },
+                params: { season: league.newestSeason, league: league.id },
                 path: "teams",
             });
 

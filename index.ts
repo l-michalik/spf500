@@ -67,6 +67,6 @@ app.listen(port, async () => {
     // await createLeagues();
     // await createTeams();
     // await createOrUpdateFixtures();
-    // await createStatistics();
+    await createStatistics();
     console.log(`Server is running on http://localhost:${port}`);
 });

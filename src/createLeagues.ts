@@ -17,12 +17,14 @@ export const createLeagues = async () => {
         response.data.response.map((doc: any) => {
             const league = doc.league;
             const country = doc.country;
+            const newestSeason = doc.seasons[doc.seasons.length - 1].year.toString();
 
             if (CLeagues.map((x: CLeaguesInterface) => x.Id).includes(league.id)) {
                 return docs.push({
                     id: league.id,
                     name: league.name,
                     country: country.name,
+                    newestSeason: newestSeason
                 });
             }
         });
@@ -35,11 +37,7 @@ export const createLeagues = async () => {
         await dbConnect();
 
         for (const doc of docs) {
-            const existingLeague = await League.findOne({ id: doc.id });
-
-            if (!existingLeague) {
-            await League.create(doc);
-            }
+            await League.findOneAndUpdate({ id: doc.id }, doc, { upsert: true });
         }
 
     } catch (error) {

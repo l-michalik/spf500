@@ -15,4 +15,5 @@ export interface CLeaguesInterface {
 export interface IleagueIds {
     id: number;
     _id: Schema.Types.ObjectId;
+    newestSeason: string;
 }

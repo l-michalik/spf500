@@ -4,7 +4,7 @@ export interface ILeague extends Document {
   id: number;
   name: string;
   country: string;
-  // start, end, current @TODO
+  newestSeason: string;
 }
 
 const leagueSchema: Schema = new mongoose.Schema<ILeague>({
@@ -20,7 +20,10 @@ const leagueSchema: Schema = new mongoose.Schema<ILeague>({
     type: String,
     required: true,
   },
-
+  newestSeason: {
+    type: String,
+    required: true,
+  }
 })
 
 export const League = mongoose.models.League || mongoose.model<ILeague>('League', leagueSchema);

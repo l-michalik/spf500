@@ -13,7 +13,7 @@ export const createOrUpdateFixtures = async () => {
     try {
         await dbConnect();
 
-        const leagues = await League.find({ id: { $in: CLeagues.map((x) => x.Id) } }).select("id");
+        const leagues = await League.find({ id: { $in: CLeagues.map((x) => x.Id) } }).select(["id", "newestSeason"]);
 
         leaguesIds.push(...leagues);
     } catch (error) {
@@ -27,7 +27,7 @@ export const createOrUpdateFixtures = async () => {
                 path: "fixtures",
                 params: {
                     league: `${league.id}`,
-                    season: `2024`,
+                    season: `${league.newestSeason}`,
                     timezone: "Europe/Warsaw",
                 },
             });
