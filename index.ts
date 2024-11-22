@@ -23,7 +23,7 @@ app.get('/getFixtures', async (req: Request, res: Response) => {
     const fixtures = await Fixture
         .find({ timestamp: { $gt: Date.now() - (2 * 60 * 60 * 1000) } })
         .sort({ timestamp: 1 })
-        .populate(["teams.home", "teams.away"])
+        .populate(["teams.home", "teams.away", 'league'])
         .limit(100)
 
     res.send(fixtures);

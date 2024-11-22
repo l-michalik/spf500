@@ -1,8 +1,6 @@
 import { CLeaguesInterface } from "../types";
 
 export const CLeagues: CLeaguesInterface[] = [
-
-    // FREAKING LEAGUES
     { country: 'England', BetclicName: 'Premier league', ApiName: 'Premier League', Id: 39 },
     { country: 'France', BetclicName: 'Ligue 1', ApiName: 'Ligue 1', Id: 61 },
     { country: 'Spain', BetclicName: 'La liga', ApiName: 'Primera Division', Id: 140 },
