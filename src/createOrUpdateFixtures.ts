@@ -49,6 +49,10 @@ export const createOrUpdateFixtures = async () => {
                                 Team.findOne({ id: teams.away.id }).select("_id"),
                                 Statistic.findOne({ "home.fixtureId": fixture.id }).select("_id"),
                             ]);
+
+                            if(!_League || !_Home || !_Away) {
+                                return;
+                            }
         
                             return {
                                 id: fixture.id,

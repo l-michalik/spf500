@@ -32,7 +32,7 @@ export const createTeams = async () => {
                     const options = createOptions({
                         params: { season: league.newestSeason, league: league.id },
                         path: "teams",
-                    });
+                    }); 
         
                     const response = await axios.request(options);
         
