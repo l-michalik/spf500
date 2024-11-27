@@ -36,6 +36,13 @@ export const createStatistics = async () => {
                     const data = response.data.response;
 
                     const teams = fixture.teams;
+
+                    if (!teams.home || !teams.away) {
+                        console.log(`Fixture ${fixture.id} has no teams.`);
+                        counter++;
+                        return;
+                    }
+
                     const homeTeamId = teams.home.id;
                     const awayTeamId = teams.away.id;
 
