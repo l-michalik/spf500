@@ -43,11 +43,14 @@ app.get('/getFixtureStats/:fixtureId/:teamId', async (req: Request, res: Respons
 
     const teamId = Number(req.params.teamId);
 
+    const fixture = await Fixture.findOne({ id: req.params.fixtureId });
+    
     const team = await Team.findOne({ id: teamId });
 
     const teamFixtures = await Fixture
         .find({
             statistic: { $ne: null },
+            timestamp: { $lt: fixture.timestamp },
             $or: [
                 { "teams.home": team },
                 { "teams.away": team }
